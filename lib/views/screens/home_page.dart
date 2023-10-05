@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:sky_scrapper/controllers/Weather_controller.dart';
 import 'package:sky_scrapper/utils/colors_utils.dart';
+import 'package:sky_scrapper/views/components/perameterBox.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -22,15 +23,6 @@ class HomePage extends StatelessWidget {
             "asset/images/weather_bg1.jpg",
           ),
         ),
-        // gradient: LinearGradient(
-        //   colors: [
-        //     Color(0xff91EAE4),
-        //     Color(0xff86A8E7),
-        //     Color(0xff7F7FD5),
-        //   ],
-        //   begin: Alignment.topCenter,
-        //   end: Alignment.bottomCenter,
-        // ),
       ),
       child: Scaffold(
         appBar: AppBar(
@@ -79,9 +71,11 @@ class HomePage extends StatelessWidget {
                     DateTime? sunset;
                     if (provider.weather != null) {
                       sunrise = DateTime.fromMillisecondsSinceEpoch(
-                          provider.weather!.sunrise * 1000);
+                        provider.weather!.sunrise * 1000,
+                      );
                       sunset = DateTime.fromMillisecondsSinceEpoch(
-                          provider.weather!.sunset * 1000);
+                        provider.weather!.sunset * 1000,
+                      );
                     }
 
                     return Padding(
@@ -158,7 +152,7 @@ class HomePage extends StatelessWidget {
                                         CrossAxisAlignment.center,
                                     children: [
                                       const SizedBox(
-                                        height: 120,
+                                        height: 180,
                                       ),
                                       Text(
                                         "${provider.weather!.temp.toInt()}°C",
@@ -243,97 +237,17 @@ class HomePage extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Container(
-                                            height: 190,
-                                            width: 190,
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 24,
-                                              vertical: 12,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: MyColor.theme1,
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  CupertinoIcons.thermometer,
-                                                  color: MyColor.white
-                                                      .withOpacity(0.6),
-                                                  size: 36,
-                                                ),
-                                                const SizedBox(
-                                                  height: 16,
-                                                ),
-                                                Text(
-                                                  "Feels Like",
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: MyColor.white
-                                                        .withOpacity(0.6),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "${provider.weather!.feels_like.toInt()}°C",
-                                                  style: TextStyle(
-                                                      fontSize: 28,
-                                                      color: MyColor.white,
-                                                      fontWeight:
-                                                          FontWeight.w700),
-                                                ),
-                                              ],
-                                            ),
+                                          perameterBox(
+                                            icon: CupertinoIcons.thermometer,
+                                            name: "Feels Like",
+                                            perameter:
+                                                "${provider.weather!.feels_like.toInt()}°C",
                                           ),
-                                          Container(
-                                            height: 190,
-                                            width: 190,
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 24,
-                                              vertical: 12,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: MyColor.theme1,
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.water_drop_rounded,
-                                                  color: MyColor.white
-                                                      .withOpacity(0.6),
-                                                  size: 36,
-                                                ),
-                                                const SizedBox(
-                                                  height: 16,
-                                                ),
-                                                Text(
-                                                  "Humidity",
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: MyColor.white
-                                                        .withOpacity(0.6),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "${provider.weather!.humidity} %",
-                                                  style: TextStyle(
-                                                    fontSize: 28,
-                                                    color: MyColor.white,
-                                                    fontWeight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                          perameterBox(
+                                            icon: Icons.water_drop_rounded,
+                                            name: "Humidity",
+                                            perameter:
+                                                "${provider.weather!.humidity} %",
                                           ),
                                         ],
                                       ),
@@ -344,97 +258,17 @@ class HomePage extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Container(
-                                            height: 190,
-                                            width: 190,
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 24,
-                                              vertical: 12,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: MyColor.theme1,
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  CupertinoIcons.wind,
-                                                  color: MyColor.white
-                                                      .withOpacity(0.6),
-                                                  size: 36,
-                                                ),
-                                                const SizedBox(
-                                                  height: 16,
-                                                ),
-                                                Text(
-                                                  "Wind",
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: MyColor.white
-                                                        .withOpacity(0.6),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "${provider.weather!.wind_speed} Mps",
-                                                  style: TextStyle(
-                                                    fontSize: 28,
-                                                    color: MyColor.white,
-                                                    fontWeight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                          perameterBox(
+                                            icon: CupertinoIcons.wind,
+                                            name: "Wind",
+                                            perameter:
+                                                "${provider.weather!.wind_speed} Mps",
                                           ),
-                                          Container(
-                                            height: 190,
-                                            width: 190,
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 24,
-                                              vertical: 12,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: MyColor.theme1,
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  CupertinoIcons.wind_snow,
-                                                  color: MyColor.white
-                                                      .withOpacity(0.6),
-                                                  size: 36,
-                                                ),
-                                                const SizedBox(
-                                                  height: 16,
-                                                ),
-                                                Text(
-                                                  "Wind Direction",
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: MyColor.white
-                                                        .withOpacity(0.6),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "${provider.weather!.wind_degree.toInt()}°",
-                                                  style: TextStyle(
-                                                      fontSize: 28,
-                                                      color: MyColor.white,
-                                                      fontWeight:
-                                                          FontWeight.w700),
-                                                ),
-                                              ],
-                                            ),
+                                          perameterBox(
+                                            icon: CupertinoIcons.wind_snow,
+                                            name: "Wind Direction",
+                                            perameter:
+                                                "${provider.weather!.wind_degree.toInt()}°",
                                           ),
                                         ],
                                       ),
@@ -445,98 +279,18 @@ class HomePage extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Container(
-                                            height: 190,
-                                            width: 190,
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 24,
-                                              vertical: 12,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: MyColor.theme1,
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  CupertinoIcons.eye_solid,
-                                                  color: MyColor.white
-                                                      .withOpacity(0.6),
-                                                  size: 36,
-                                                ),
-                                                const SizedBox(
-                                                  height: 16,
-                                                ),
-                                                Text(
-                                                  "Visibility",
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: MyColor.white
-                                                        .withOpacity(0.6),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "${provider.weather!.visibility / 1000.toInt()} Km",
-                                                  style: TextStyle(
-                                                    fontSize: 28,
-                                                    color: MyColor.white,
-                                                    fontWeight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                          perameterBox(
+                                            icon: CupertinoIcons.eye_solid,
+                                            name: "Visibility",
+                                            perameter:
+                                                "${provider.weather!.visibility / 1000.toInt()} Km",
                                           ),
-                                          Container(
-                                            height: 190,
-                                            width: 190,
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 24,
-                                              vertical: 12,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: MyColor.theme1,
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.air,
-                                                  color: MyColor.white
-                                                      .withOpacity(0.6),
-                                                  size: 36,
-                                                ),
-                                                const SizedBox(
-                                                  height: 16,
-                                                ),
-                                                Text(
-                                                  "Air Pressure",
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: MyColor.white
-                                                        .withOpacity(0.6),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "${provider.weather!.pressure} hPa",
-                                                  style: TextStyle(
-                                                      fontSize: 28,
-                                                      color: MyColor.white,
-                                                      fontWeight:
-                                                          FontWeight.w700),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                          perameterBox(
+                                            icon: Icons.air,
+                                            name: "Air Pressure",
+                                            perameter:
+                                                "${provider.weather!.pressure} hPa",
+                                          )
                                         ],
                                       ),
                                       const SizedBox(
@@ -546,98 +300,18 @@ class HomePage extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Container(
-                                            height: 190,
-                                            width: 190,
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 24,
-                                              vertical: 12,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: MyColor.theme1,
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  CupertinoIcons.sunrise,
-                                                  color: MyColor.white
-                                                      .withOpacity(0.6),
-                                                  size: 36,
-                                                ),
-                                                const SizedBox(
-                                                  height: 16,
-                                                ),
-                                                Text(
-                                                  "Sunrise",
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: MyColor.white
-                                                        .withOpacity(0.6),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "${sunrise!.hour}:${sunrise.minute.toString().padLeft(2, "0")} AM",
-                                                  style: TextStyle(
-                                                    fontSize: 28,
-                                                    color: MyColor.white,
-                                                    fontWeight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                          perameterBox(
+                                            icon: CupertinoIcons.sunrise,
+                                            name: "Sunrise",
+                                            perameter:
+                                                "${sunrise!.hour}:${sunrise.minute.toString().padLeft(2, "0")} AM",
                                           ),
-                                          Container(
-                                            height: 190,
-                                            width: 190,
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 24,
-                                              vertical: 12,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: MyColor.theme1,
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  CupertinoIcons.sunset,
-                                                  color: MyColor.white
-                                                      .withOpacity(0.6),
-                                                  size: 36,
-                                                ),
-                                                const SizedBox(
-                                                  height: 16,
-                                                ),
-                                                Text(
-                                                  "Sunset",
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: MyColor.white
-                                                        .withOpacity(0.6),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "${sunset!.hour % 12}:${sunset.minute.toString().padLeft(2, "0")} PM",
-                                                  style: TextStyle(
-                                                    fontSize: 28,
-                                                    color: MyColor.white,
-                                                    fontWeight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                          perameterBox(
+                                            icon: CupertinoIcons.sunset,
+                                            name: "Sunset",
+                                            perameter:
+                                                "${sunset!.hour % 12}:${sunset.minute.toString().padLeft(2, "0")} PM",
+                                          )
                                         ],
                                       ),
                                       const SizedBox(
