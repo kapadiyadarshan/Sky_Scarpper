@@ -12,6 +12,15 @@ class ApiHelper {
   String Api =
       "https://api.openweathermap.org/data/2.5/weather?appid=217d9466fcece181f108ef7574f237b4&units=metric";
 
+  List<String> locationList = [
+    "Delhi",
+    "Mumbai",
+    "bangalore",
+    "california",
+    "adelaide",
+    "dubai",
+  ];
+
   Future<Weather?> getWeatherData({required String location}) async {
     http.Response response = await http.get(
       Uri.parse("${Api}&q=$location"),
@@ -26,5 +35,26 @@ class ApiHelper {
     } else {
       return null;
     }
+  }
+
+  getLocationListData() {
+    List<Weather?> locationWeather = [];
+
+    locationList.map((e) async {
+      http.Response response = await http.get(Uri.parse("${Api}&q=$e"));
+
+      if (response.statusCode == 200) {
+        Map data = jsonDecode(response.body);
+
+        Weather weather = Weather.fromMap(data: data);
+
+        locationWeather.add(weather);
+
+        return weather;
+      } else {
+        return null;
+      }
+    }).toList();
+    return locationWeather;
   }
 }

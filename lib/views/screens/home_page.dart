@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:sky_scrapper/controllers/Weather_controller.dart';
 import 'package:sky_scrapper/utils/colors_utils.dart';
+import 'package:sky_scrapper/utils/route_utils.dart';
 import 'package:sky_scrapper/views/components/perameterBox.dart';
 
 class HomePage extends StatelessWidget {
@@ -29,11 +30,22 @@ class HomePage extends StatelessWidget {
           title: Text(
             "Weather",
             style: TextStyle(
-              color: MyColor.theme1,
+              color: MyColor.white,
               fontWeight: FontWeight.bold,
             ),
           ),
           centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(MyRoute.loctionPage);
+              },
+              icon: const Icon(
+                Icons.list,
+                color: Colors.white,
+              ),
+            ),
+          ],
           backgroundColor: Colors.transparent,
         ),
         body: Center(
@@ -95,12 +107,23 @@ class HomePage extends StatelessWidget {
                                 onFieldSubmitted: (value) {
                                   provider.getData(location: value);
                                 },
+                                onTapOutside: (event) {
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                },
+                                cursorColor: MyColor.theme1,
                                 decoration: InputDecoration(
                                   isDense: true,
                                   hintText: "Search Location",
                                   prefixIcon: const Icon(
                                     Icons.search,
                                     size: 24,
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 3,
+                                      color: MyColor.theme1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(
